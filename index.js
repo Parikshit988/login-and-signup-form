@@ -1,24 +1,37 @@
-function submitForm(){
+function reloadpage(){
+    var refreshToken = localStorage.getItem("refreshToken")
+    if(refreshToken){
+        window.location.href="profile.html"
+    }
+}
+function submitForm(){debugger
     let fullName = document.getElementById("fullName").value
     let email = document.getElementById('email').value
     let password = document.getElementById("password").value
     let confirmPassword = document.getElementById('confirmPassword').value
     
-    document.getElementById('loginName').textContent=fullName
-    document.getElementById('loginEmail').textContent=email
-    document.getElementById('loginPassword').textContent=password
- 
-    console.log(fullName,email,password,confirmPassword)
- 
-    resetSubmitField()
+    var refreshToken = "xyzqwerty65654kijggvhbhbhvg"
+   var data = {
+    "fullName":fullName,
+    "email":email,
+    "password":password,
     
+   }
+   localStorage.setItem("data",JSON.stringify(data))
+   localStorage.setItem("refreshToken",refreshToken)
+   window.location.href="profile.html"
+   
 }
  
-const resetSubmitField =()=> {
-    
-    document.getElementById('fullName').value = ""
-    document.getElementById('email').value = ""
-    document.getElementById('password').value = ""
-    document.getElementById('confirmPassword').value = ""
-   
+function getProfileDta(){
+    var values = JSON.parse(localStorage.getItem("data"))
+    debugger;
+    document.getElementById("loginName").textContent=values.fullName
+    document.getElementById("loginEmail").textContent=values.email
+    document.getElementById("loginPassword").textContent=values.password
+}
+ 
+function logout(){
+    localStorage.clear()
+    window.location.href="index.html"
 }
